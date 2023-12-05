@@ -11,19 +11,22 @@ producer = KafkaProducer(
 )
 i = 0
 message = 'Hello, Kafka!'
-print(f" [x] Sent main Hello, Kafka!")
+
 producer.send(
         KAFKA_TOPIC_TEST,
         b'main Hello, Kafka!',
     )
-print(f" [x] Sent retry Hello, Kafka!")
+
+print(f" [x] Sent main Hello, Kafka!")
 producer.send(
         KAFKA_TOPIC_TEST,
         b'retry Hello, Kafka!',
     )
-print(f" [x] Sent error Hello, Kafka!")
+print(f" [x] Sent retry Hello, Kafka!")
+
 producer.send(
         KAFKA_TOPIC_TEST,
         b'error Hello, Kafka!',
     )
+print(f" [x] Sent error Hello, Kafka!")
 producer.flush()
