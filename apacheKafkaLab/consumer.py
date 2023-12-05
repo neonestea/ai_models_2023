@@ -3,7 +3,7 @@ from kafka import KafkaConsumer, KafkaProducer
 KAFKA_BOOTSTRAP_SERVERS = os.environ.get("KAFKA_BOOTSTRAP_SERVERS", "localhost:29092")
 KAFKA_TOPIC_TEST = os.environ.get("KAFKA_TOPIC_TEST", "my_topic")
 KAFKA_API_VERSION = os.environ.get("KAFKA_API_VERSION", "7.5.2")
-
+KAFKA_CONSUMER_GROUP = os.environ.get("KAFKA_API_VERSION", "my-test-group")
 
 
 consumer = KafkaConsumer(
@@ -12,7 +12,7 @@ consumer = KafkaConsumer(
     api_version=KAFKA_API_VERSION,
     auto_offset_reset="earliest",
     enable_auto_commit=True,
-    group_id='my-test-group',
+    group_id=KAFKA_CONSUMER_GROUP,
 )
 
 producer = KafkaProducer(
@@ -30,6 +30,6 @@ for message in consumer:
         print(f'[Retry] {message}')
     elif 'error' in message:
         producer.send('dead-letter-topic', bytes(message, 'utf-8'),)
-        print(f'[Retry] {message}')
+        print(f'[DLT] {message}')
 
 
