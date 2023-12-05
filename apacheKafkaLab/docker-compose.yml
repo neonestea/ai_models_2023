@@ -23,9 +23,21 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_BOOTSTRAP_SERVERS: localhost:29092
+      KAFKA_TOPIC_TEST: my_topic
+      KAFKA_API_VERSION: 7.5.2
+      KAFKA_CONSUMER_GROUP: my-test-group
     restart: on-failure
-  cli-tools:
-    image: confluentinc/cp-kafka:6.1.1
-    container_name: cli-tools
-    entrypoint: "sleep infinity"
-    restart: always
+  #producer:
+   # build: producer
+   # depends_on:
+   #     - kafka
+   # volumes:
+   #   - ./producer:/C:/Users/yanko/OneDrive/Изображения/Документы/Study/ВШЭ/apacheKafkaLab/producer
+
+  #consumer1:
+  #  build: consumer
+  #  depends_on:
+    #    - kafka
+   # volumes:
+  #    - ./consumer:/C:/Users/yanko/OneDrive/Изображения/Документы/Study/ВШЭ/apacheKafkaLab/consumer
